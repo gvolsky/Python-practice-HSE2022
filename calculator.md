@@ -1,7 +1,7 @@
 # Calculator class
 
-+ [Calculator class of comlex number](#calculator class of comlex number)
-+ [Tests for Calculator class](#tests for Calculator class)
++ [Calculator class of comlex number](#calculator-class-of-comlex-number)
++ [Tests for Calculator class](#tests-for-calculator-class)
 
 ## Calculator class of comlex number
 
