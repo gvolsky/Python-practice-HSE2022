@@ -9,12 +9,10 @@ class Converter:
         self.inp = inp_csv
         self.out = out_json
 
-
     def read(self):
     	lines = []
         with open(self.inp, 'r', newline='') as f:
             return list(csv.DictReader(f, delimiter=','))
-
 
     def write(self, data):
         result = json.dumps(data)
