@@ -44,7 +44,7 @@ class TaskManager:
         self.tasks.difference(set(tasks))
     
     def remove_subtasks(self, *tasks):
-        self.subtasks.difference(set(*tasks))
+        self.subtasks.difference(set(tasks))
     
     def remove_complex_tasks(self, *tasks):
         tasks_id = {task.id for task in tasks}
@@ -79,14 +79,7 @@ class TaskManager:
             raise Exception('there is no such id')
 
     def update_status(self, task, new_status):
-        if isinstance(task, Task):
-            if task in self.tasks:
-                task.status = new_status
-        elif isinstance(task, Subtask):
-            if task in self.subtasks:
-                task.status = new_status
-        elif isinstance(task, ComplexTask):
-            if task in self.complex_tasks:
-                task.status = new_status
+        if task in self.tasks or task in self.subtasks or task in self.complex_tasks:
+            task.status = new_status
         else:
             raise Exception('there is no such task')
