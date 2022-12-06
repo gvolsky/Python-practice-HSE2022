@@ -15,6 +15,6 @@ class Subtask(Task):
 
 class ComplexTask(Task):
     # contains list of subtasks
-    def __init__(self, id, name, description, status, subtask):
+    def __init__(self, id, name, description, status, *subtasks):
         super().__init__(id, name, description, status)
-        self.subtasks = subtask   
+        self.subtasks = list(subtasks)   
