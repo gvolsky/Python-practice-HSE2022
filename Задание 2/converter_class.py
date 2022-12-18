@@ -2,7 +2,6 @@ import json
 import csv
 import sys
 
-
 class Converter:
 
     def __init__(self, inp_csv, out_json):
@@ -26,6 +25,5 @@ def main():
     data = converter.read()
     converter.write(data)
     
-
 if __name__ == "__main__":
     main()
