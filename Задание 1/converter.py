@@ -5,10 +5,9 @@ def read_data(file_name):
     return content
 
 def write_data(file_name, data):
-    file = open(file_name, 'a+')
-    file.write('\n')
-    file.write(data)
-    file.close()
+    with open(file_name, 'a+') as f:
+        f.write('\n')
+        f.write(data)
 
 def prepare_md_titles(data):
     title, description = None, None
