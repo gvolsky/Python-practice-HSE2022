@@ -9,7 +9,6 @@ class Converter:
         self.out = out_json
 
     def read(self):
-    	lines = []
         with open(self.inp, 'r', newline='') as f:
             return list(csv.DictReader(f, delimiter=','))
 
