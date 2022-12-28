@@ -36,7 +36,7 @@ def count_letter(word, letters):
     if len(word) == 1:
         if word.isalpha():
             letters[word] += 1
-    else:
+    elif word:
         for i in range(len(word) - 1):
             if word[i:i + 2].isalpha():
                 letters[word[i:i + 2]] += 1
@@ -47,11 +47,11 @@ def count_bigrams(data):
         if len(line) == 1:
             words[line[0]] += 1
             count_letter(line[0], letters)     
-        else:
+        elif line:
             for idx in range(len(line) - 1):
                 words[' '.join([line[idx], line[idx + 1]])] += 1
                 count_letter(line[idx], letters) 
-                count_letter(line[idx + 1], letters) 
+            count_letter(line[LAST], letters) 
     return words, letters
 
 def main():
