@@ -1,6 +1,7 @@
 """
-Поделить текст на слова и посчитать статистику биграмм, игнорируя размер букв. Вывести те биграммы, которые не реже чем 2 раза. Вывести в отсортированном по частотности порядке. 
-И вывести символьные биграммы, готорые встречаются чаще 10 раз.
+Поделить текст на слова и посчитать статистику биграмм, игнорируя размер букв. Вывести те биграммы, которые встречаются не реже чем 2 раза. 
+Вывести в отсортированном по частотности порядке. 
+Вывести символьные биграммы, готорые встречаются чаще 10 раз.
 Вывести построчечно.
 """
 
@@ -11,7 +12,8 @@ PUNC = set(punctuation)
 LAST = -1
 PREFIX = slice(None, -1)
 SUFFIX = (1, None)
-FIRST, SECOND = 0, 1
+WORD_FREQ = 2
+LETTER_FREQ = 11
 
 def clear_word(word):
     while word[LAST] in PUNC:
@@ -56,13 +58,13 @@ def main():
     data = get_data()
     words, letters = count_bigrams(data)
     print("\n~~~~~Word's bigrams~~~~~\n")
-    for pair in words.most_common():
-        if pair[1] >= 2:
-            print(f'{pair[FIRST]}: {pair[SECOND]}')
+    for word, freq in words.most_common():
+        if freq >= WORD_FREQ:
+            print(f'{word}: {freq}')
     print("\n~~~~~Letter's bigrams~~~~~\n")
-    for pair in letters.most_common():
-        if pair[1] >= 10:
-            print(f'{pair[FIRST]}: {pair[SECOND]}')
+    for pairs, freq in letters.most_common():
+        if freq >= LETTER_FREQ:
+            print(f'{pairs}: {freq}')
 
 if __name__ =="__main__":
     main()
