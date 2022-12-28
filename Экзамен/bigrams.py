@@ -6,7 +6,19 @@
 
 from collections import Counter
 from string import punctuation
+
 PUNC = set(punctuation)
+LAST = -1
+PREFIX = slice(None, -1)
+SUFFIX = (1, None)
+FIRST, SECOND = 0, 1
+
+def clear_word(word):
+    while word[LAST] in PUNC:
+        word = word[PREFIX]
+    while word[0] in PUNC:
+        word = word[SUFFIX]
+    return word
 
 def get_data(path='input.txt'):
     data = []
@@ -14,19 +26,18 @@ def get_data(path='input.txt'):
         for raw_line in f:
             line = raw_line.lower().split()
             for idx in range(len(line)):
-                while line[idx][-1] in PUNC:
-                    line[idx] = line[idx][:-1]
-                while line[idx][0] in PUNC:
-                    line[idx] = line[idx][1:]
+                line[idx] = clear_word(line[idx])
             data.append(line)
     return data
 
 def count_letter(word, letters):
     if len(word) == 1:
-        letters[word] += 1
+        if word.isalpha():
+            letters[word] += 1
     else:
         for i in range(len(word) - 1):
-            letters[word[i:i + 2]] += 1
+            if word[i:i + 2].isalpha():
+                letters[word[i:i + 2]] += 1
 
 def count_bigrams(data):
     words = Counter()
@@ -47,11 +58,11 @@ def main():
     print("\n~~~~~Word's bigrams~~~~~\n")
     for pair in words.most_common():
         if pair[1] >= 2:
-            print(f'{pair[0]}: {pair[1]}')
+            print(f'{pair[FIRST]}: {pair[SECOND]}')
     print("\n~~~~~Letter's bigrams~~~~~\n")
     for pair in letters.most_common():
         if pair[1] >= 10:
-            print(f'{pair[0]}: {pair[1]}')
+            print(f'{pair[FIRST]}: {pair[SECOND]}')
 
 if __name__ =="__main__":
     main()
