@@ -1,7 +1,6 @@
 def read_data(file_name):
-    file = open(file_name)
-    content = file.read()
-    file.close()
+    with open(file_name) as f:
+        content = f.read()
     return content
 
 def write_data(file_name, data):
