@@ -1,3 +1,9 @@
+"""
+Поделить текст на слова и посчитать статистику биграмм, игнорируя размер букв. Вывести те биграммы, которые не реже чем 2 раза. Вывести в отсортированном по частотности порядке. 
+И вывести символьные биграммы, готорые встречаются чаще 10 раз.
+Вывести построчечно.
+"""
+
 from collections import Counter
 from string import punctuation
 PUNC = set(punctuation)
@@ -20,8 +26,7 @@ def count_letter(word, letters):
         letters[word] += 1
     else:
         for i in range(len(word) - 1):
-            letters[word[i:i + 1]] += 1
-
+            letters[word[i:i + 2]] += 1
 
 def count_bigrams(data):
     words = Counter()
@@ -35,12 +40,18 @@ def count_bigrams(data):
             count_letter(line[idx], letters) 
             count_letter(line[idx + 1], letters) 
     return words, letters
+
 def main():
-    
     data = get_data()
-    print(count_bigrams(data))
+    words, letters = count_bigrams(data)
+    print("\n~~~~~Word's bigrams~~~~~\n")
+    for pair in words.most_common():
+        if pair[1] >= 2:
+            print(f'{pair[0]}: {pair[1]}')
+    print("\n~~~~~Letter's bigrams~~~~~\n")
+    for pair in letters.most_common():
+        if pair[1] >= 10:
+            print(f'{pair[0]}: {pair[1]}')
 
 if __name__ =="__main__":
     main()
-
-
