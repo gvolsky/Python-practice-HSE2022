@@ -42,8 +42,7 @@ def count_letter(word, letters):
                 letters[word[i:i + 2]] += 1
 
 def count_bigrams(data):
-    words = Counter()
-    letters = Counter()
+    words, letters = Counter(), Counter()
     for line in data:
         if len(line) == 1:
             words[line[0]] += 1
